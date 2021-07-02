@@ -40,8 +40,11 @@ function create () {
     player = this.physics.add.sprite(100, 450, 'dude');
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
+    player.body.setGravityY(300);
 
     this.physics.add.collider(player, platforms);
+
+    cursors = this.input.keyboard.createCursorKeys();
 
     this.anims.create({
         key: 'left',
@@ -66,4 +69,21 @@ function create () {
 
 function update ()
 {
+    //move left/right
+    if (cursors.left.isDown) {
+        player.setVelocityX(-160);
+        player.anims.play('left', true);
+    }
+    else if (cursors.right.isDown) {
+        player.setVelocityX(160);
+        player.anims.play('right', true);
+    }
+    else {
+        player.setVelocityX(0);
+        player.anims.play('turn', true);
+    }
+    //jump
+    if (cursors.up.isDown && player.body.touching.down) {
+        player.setVelocityY(-500);
+    }
 }
