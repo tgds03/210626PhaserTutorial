@@ -39,7 +39,9 @@ function create () {
         
     player = this.physics.add.sprite(100, 450, 'dude');
     player.setBounce(0.2);
-    player.setColliderWorldBounds(true);
+    player.setCollideWorldBounds(true);
+
+    this.physics.add.collider(player, platforms);
 
     this.anims.create({
         key: 'left',
